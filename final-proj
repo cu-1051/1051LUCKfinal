@@ -1,13 +1,42 @@
-#Proposal
-## """What idea(s) do you have for your final project?"""
+"""#**Proposal**
+## What will likely be the title of your project?
+- "Luck of The Draw" or something similar
+
 "A gambling/luck game similar to the lottery, where you input numbers and randomly get a result,"
 "like 123123 would put you in debt, 777777 gives you a million dollars, 000000 means you're evicted with $50 to your name etc"
 "and after 5 or so inputs your end situation is compiled into a fun story and you get told what type of luck you have."
-"ex: You went deep into debt but won a million dollars, and later got evicted with $50 in your bank account, you have IRONIC luck or something like that"
--
-## """If you plan to collaborate with one or two classmates, what are their names?"""
-N/A
--
-## """Do you have any questions of your own?"""
-"does this project have to be challenging to us as individuals or as a class because I don't think I'm on the same programming level
-"that I'm exepected to be at right now and i don't know if I could do anything super extensive"
+"ex: You went deep into debt but won a million dollars, and later got evicted with $50 in your bank account, 
+you have IRONIC luck or something like that"
+
+## In just a sentence or two summarize your project.
+- "Luck of the draw" is a gambling/lottery based game that depends on user inputs. (Considering a card drawing game as well)
+
+## In a paragraph or more, detail your project. What will your software do? What features will it have? How will it be executed?
+- "Luck of the Draw" takes various aspects from lottery games, gambling games, blackjack etc., that gives the user a chance to win
+or lose mainly by random. The software should take user inputs, randomize an output (of which the odds change due to what is inputted)
+and return a result to the user determining if they've won or lost. It should have text and visal graphics. It will be executed 
+through renpy or IDLE.
+
+##In the world of software, most everything takes longer to implement than you expect. And so it's not uncommon to 
+accomplish less in a fixed amount of time than you hope. 
+
+##In a sentence (or list of features), define a GOOD outcome for your final project. 
+I.e., what WILL you accomplish no matter what? 
+- Software that takes user input, randomizes an output, and finishes the game by letting user know they have won or lost.
+
+##In a sentence (or list of features), define a BETTER outcome for your final project. 
+I.e., what do you THINK you can accomplish before the final project's deadline? 
+- Comprehensive software that takes user inputs, randomizes outputs, returns them to the user and allows the user to interact
+while also finishing the game letting the user know if they won or lost. May have graphics.
+
+##In a sentence (or list of features), define a BEST outcome for your project. 
+What do you HOPE to accomplish before the final project's deadline? 
+- I hope to accomplish an interesting and refreshing lottery/gambling game that isn't predictable. Software that runs 
+all the way through with minimal errors, returning the output to the user. May have graphics.
+
+##In a paragraph or more, outline your next steps. What new skills will you need to acquire? 
+What topics will you need to research? If working with one of two classmates, who will do what?
+- Skills I need to acquire/brush up on: programming functions using for and while loops, debugging my own programs
+working throuhg the knots in my code and seeking help/assistance when necessary. I'll need to research other 
+luck/lottery/gambling based games like BlackJack to understand my goal fully. I'm not working with others.
+"""

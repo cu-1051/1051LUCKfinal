@@ -1,1 +1,1 @@
-A game programmed in python based on luck/gambling/lottery
+A game of blackjack programmed in python, supplemented with turtle graphics.

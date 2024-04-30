@@ -1,42 +1,202 @@
-"""#**Proposal**
-## What will likely be the title of your project?
-- "Luck of The Draw" or something similar
+#black jack w turtle graphics
+#Chidiogo Uwah (freshman)
+#CIS1051, 2024
 
-"A gambling/luck game similar to the lottery, where you input numbers and randomly get a result,"
-"like 123123 would put you in debt, 777777 gives you a million dollars, 000000 means you're evicted with $50 to your name etc"
-"and after 5 or so inputs your end situation is compiled into a fun story and you get told what type of luck you have."
-"ex: You went deep into debt but won a million dollars, and later got evicted with $50 in your bank account, 
-you have IRONIC luck or something like that"
+import random  
 
-## In just a sentence or two summarize your project.
-- "Luck of the draw" is a gambling/lottery based game that depends on user inputs. (Considering a card drawing game as well)
+#variables
+#deck of cards, player & dealer hands
+playerIn = True
+dealerIn = True
 
-## In a paragraph or more, detail your project. What will your software do? What features will it have? How will it be executed?
-- "Luck of the Draw" takes various aspects from lottery games, gambling games, blackjack etc., that gives the user a chance to win
-or lose mainly by random. The software should take user inputs, randomize an output (of which the odds change due to what is inputted)
-and return a result to the user determining if they've won or lost. It should have text and visal graphics. It will be executed 
-through renpy or IDLE.
+deck = [2,3,4,5,6,7,8,9,10, 'A','J','Q','K',
+        2,3,4,5,6,7,8,9,10, 'A','J','Q','K',
+        2,3,4,5,6,7,8,9,10, 'A','J','Q','K',
+        2,3,4,5,6,7,8,9,10, 'A','J','Q','K',
+        ]
+playerHand = []
+dealerHand = []
 
-##In the world of software, most everything takes longer to implement than you expect. And so it's not uncommon to 
-accomplish less in a fixed amount of time than you hope. 
+#function to deal out cards
+def dealCard(turn):
+    card = random.choice(deck)
+    turn.append(card)
+    deck.remove(card)
+    #choosing a random card from the deck, adding to
+    #whoever's turn it is, removing the card from deck
+    
+#calculate the total of each hand
+def totalHand(turn):
+    total = 0
+    face = ['J','Q','K']
+    for card in turn:
+        if card in range(1,11):
+            total += card
+        elif card in face:
+            total += 10
+        else: #accounts solely for the 'A', not in face list
+            if total > 11:
+                total +=1
+            else:
+                total +=11
+    return total
+            #totalHand function subject to change ^
 
-##In a sentence (or list of features), define a GOOD outcome for your final project. 
-I.e., what WILL you accomplish no matter what? 
-- Software that takes user input, randomizes an output, and finishes the game by letting user know they have won or lost.
+#function to check the dealer's hand
+def revealDealerHand():
+    if len(dealerHand) == 2:
+        return dealerHand[0]
+    elif len(dealerHand) > 2:
+        return dealerHand[0], dealerHand[1]
+    #maybe offer the option where the dealer's hand is hidden or not
 
-##In a sentence (or list of features), define a BETTER outcome for your final project. 
-I.e., what do you THINK you can accomplish before the final project's deadline? 
-- Comprehensive software that takes user inputs, randomizes outputs, returns them to the user and allows the user to interact
-while also finishing the game letting the user know if they won or lost. May have graphics.
+#maybe put this all in a function (loops)
+for _ in range(2):
+    dealCard(dealerHand)
+    dealCard(playerHand)
 
-##In a sentence (or list of features), define a BEST outcome for your project. 
-What do you HOPE to accomplish before the final project's deadline? 
-- I hope to accomplish an interesting and refreshing lottery/gambling game that isn't predictable. Software that runs 
-all the way through with minimal errors, returning the output to the user. May have graphics.
+print("['",dealerHand[0],"', 'X']")
+print(playerHand)
 
-##In a paragraph or more, outline your next steps. What new skills will you need to acquire? 
-What topics will you need to research? If working with one of two classmates, who will do what?
-- Skills I need to acquire/brush up on: programming functions using for and while loops, debugging my own programs
-working throuhg the knots in my code and seeking help/assistance when necessary. I'll need to research other 
-luck/lottery/gambling based games like BlackJack to understand my goal fully. I'm not working with others.
-"""
+while playerIn or dealerIn:
+    print("Dealer has ",revealDealerHand()," and Unkown Card X")
+    print("You have ", playerHand, " for a total of",
+          totalHand(playerHand)) #translate face cards into ints
+    if playerIn:
+        stayOrHit = input("1: Stay\n2: Hit\n")
+    if totalHand(dealerHand) > 16:
+        dealerIn = False
+    else:
+        dealCard(dealerHand)
+    if stayOrHit == '1':
+        playerIn = False
+    else:
+        dealCard(playerHand)
+    if totalHand(playerHand) >= 21: #total FUNCTION
+        break
+    elif totalHand(dealerHand) >= 21:
+        break
+
+#TURTLE SECTION
+#turtle section of black jack final proj
+import turtle
+import tkinter
+W = turtle.Turtle()
+W.shape("triangle")
+W.width("5")
+W.color("black")
+W.speed(10)
+
+
+"""wn = turtle.Screen()
+wn.title("BlackJack")
+canvas = wn.getcanvas()
+canvas.creat_image"""
+turtle.setup(965, 600)
+turtle.bgcolor("black")
+turtle.bgpic(picname="Blackjack.png")
+
+def sparkle(turtle):
+    for _ in range(4):
+        turtle.speed(10)
+        turtle.circle(20,90)
+        turtle.right(180)
+        
+def winningAnimation(turtle):
+    turtle.penup()
+    turtle.fd(-250)
+    turtle.pendown()
+    turtle.write("YOU WON!",
+                 move=True,
+                 align='left' ,
+                 font = ("Futura",
+                         48, "bold"))
+    turtle.penup()
+    turtle.left(90)
+    turtle.fd(70)
+    turtle.pendown()
+    turtle.pensize(4)
+    turtle.width(4)
+    turtle.color("gold")
+    sparkle(turtle)
+    turtle.left(90)
+    turtle.penup()
+    turtle.fd(200)
+    turtle.pendown()
+    sparkle(turtle)
+
+    
+def losingAnimation(turtle):
+    turtle.penup()
+    turtle.fd(-250)
+    turtle.pendown()
+    turtle.write("YOU LOST!", move=True, align='left' ,
+                 font = ("Futura",48, "bold"))
+    turtle.right(90)
+    turtle.penup()
+    turtle.fd(50)
+    turtle.left(90)
+    turtle.fd(-100)
+    turtle.write("better luck next time..", move=True, align='left' ,
+                 font = ("Futura",30, "italic"))
+
+
+
+
+
+
+#RESULTS        
+if totalHand(playerHand) == 21:
+    print("\nYou have ", playerHand," for a total of",
+          totalHand(playerHand), "and the dealer has ",
+          dealerHand, "for a total of", totalHand(dealerHand))
+    winningAnimation(W)
+    #W.done()
+    print("Blackjack! You Win!")#maybe add a turtle animation for winning
+elif totalHand(dealerHand) == 21:
+    print("\nYou have ", playerHand," for a total of",
+          totalHand(playerHand), "and the dealer has ",
+          dealerHand, "for a total of", totalHand(dealerHand))
+    losingAnimation(W)
+    #W.done()
+    print("Blackjack! Dealer Wins.")
+elif totalHand(playerHand) > 21:
+    print("\nYou have ", playerHand," for a total of",
+          totalHand(playerHand), "and the dealer has ",
+          dealerHand, "for a total of", totalHand(dealerHand))
+    losingAnimation(W)
+    #W.done()
+    print("Bust! Dealer Wins.")
+elif totalHand(dealerHand) > 21:
+    print("\nYou have ", playerHand," for a total of",
+          totalHand(playerHand), "and the dealer has ",
+          dealerHand, "for a total of", totalHand(dealerHand))
+    winningAnimation(W)
+    #W.done()
+    print("Dealer bust! You Win!")
+elif 21 - (totalHand(dealerHand)) < 21 - (totalHand(playerHand)):
+    print("\nYou have ", playerHand," for a total of",
+          totalHand(playerHand), "and the dealer has ",
+          dealerHand, "for a total of", totalHand(dealerHand))
+    losingAnimation(W)
+    #W.done()
+    print("Dealer Wins.")
+elif 21 - (totalHand(dealerHand)) > 21 - (totalHand(playerHand)):
+    print("\nYou have ", playerHand," for a total of",
+          totalHand(playerHand), "and the dealer has ",
+          dealerHand, "for a total of", totalHand(dealerHand))
+    winningAnimation(W)
+    #W.done()
+    print("You Win!")
+
+
+#more on turtle animation:
+    #could be with a cards background and fireworks,
+    #like old style windows solitaire celebrations
+    
+
+
+#additional option for stay or hit besides 1 or 2: S or H, Stay or Hit etc
+    #offer the option to pass
+    #maybe have another player
+    
